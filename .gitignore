@@ -1,0 +1,14 @@
+/.venv
+data/raw/
+data/processed/
+data/features/
+data/graphs/
+__pycache__/
+*.pyc
+*.pkl
+*.db
+*.pt
+*.npy
+.vscode/
+.idea/
+*.egg-info/
