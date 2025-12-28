@@ -12,3 +12,5 @@ __pycache__/
 .vscode/
 .idea/
 *.egg-info/
+gnn_train_output.log
+gnn_train_error.log
