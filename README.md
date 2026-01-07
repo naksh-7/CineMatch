@@ -1,6 +1,7 @@
 CineMatch: Hybrid GNN Movie Discovery Engine
+Dashboard:
 ![Dashboard Preview](assets/dashboard_screenshot.png)
-![Dashboard Preview](assets/Example_screenshot.png)
+
 CineMatch is a multi-stage recommendation system that moves beyond simple metadata matching. By combining FAISS-based vector retrieval with Graph Neural Networks (GNN), it identifies latent behavioral connections between films—surfacing "Hidden Gems" that traditional algorithms miss.
 
 The Architecture: Two-Stage Retrieval
