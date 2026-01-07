@@ -3,11 +3,14 @@ data/raw/
 data/processed/
 data/features/
 data/graphs/
+backend/data/
+backend/logs/
 __pycache__/
 *.pyc
 *.pkl
 *.db
 *.pt
+!backend/checkpoints/*.pt
 *.npy
 .vscode/
 .idea/
