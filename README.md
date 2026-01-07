@@ -1,54 +1,49 @@
-# GNN Movie Graph ETL
+CineMatch: Hybrid GNN Movie Discovery Engine
+![Dashboard Preview](assets/dashboard_screenshot.png)
+![Dashboard Preview](assets/Example_screenshot.png)
+CineMatch is a multi-stage recommendation system that moves beyond simple metadata matching. By combining FAISS-based vector retrieval with Graph Neural Networks (GNN), it identifies latent behavioral connections between films—surfacing "Hidden Gems" that traditional algorithms miss.
 
-This workspace contains scripts to download public MovieLens and IMDb datasets and to build a unified schema for heterogeneous graph construction.
+The Architecture: Two-Stage Retrieval
+Most recommenders suffer from a "Filter Bubble." CineMatch breaks this using a high-performance pipeline:
 
-Quick start (Windows PowerShell):
+Candidate Generation (FAISS): Performs a high-dimensional semantic search across 10,000+ movies to find an initial pool of candidates using plot and genre embeddings.
 
-1. Create a virtual environment and install dependencies:
+Latent Reranking (GNN): A Graph Neural Network (trained on MovieLens/IMDb) analyzes the "Aura" (user-item interaction clusters). It reranks candidates based on deep structural connectivity rather than just shared keywords.
 
-```powershell
+Heuristic Filtering: A final layer applies strict penalties to "Title Junk" (sequels/reboots) and adjusts weights for cast affinity in real-time.
+
+Tech Stack
+Deep Learning: PyTorch, PyTorch Geometric (GNNs), Sentence-Transformers.
+
+Vector Database: FAISS (Facebook AI Similarity Search).
+
+Backend: FastAPI (Asynchronous, Type-safe).
+
+Frontend: React (Vite), Tailwind/Custom CSS for the "Cyber-Neon" UI.
+
+Data: Unified schema merging MovieLens, IMDb, and TMDB.
+
+Quick Start
+1. Backend Setup
+PowerShell
+
+# Create environment
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\pip.exe install -r requirements.txt
-```
+.\.venv\Scripts\Activate.ps1
 
-2. Download datasets:
+# Install dependencies
+pip install -r requirements.txt
 
-```powershell
-.\.venv\Scripts\python.exe scripts\download_datasets.py
-```
+# Run the ETL to prepare the Graph
+python scripts/etl_schema.py
 
-3. Run ETL to produce processed CSVs:
+# Start the API
+uvicorn app.main:app --reload
+2. Frontend Setup
+PowerShell
 
-```powershell
-.\.venv\Scripts\python.exe scripts\etl_schema.py
-```
-
-Notes:
-- For plot summaries and richer metadata you can optionally enrich with TMDb/OMDb APIs (API keys required).
-- Embedding/model packages (PyTorch, sentence-transformers, PyG/DGL) are intentionally left out of the minimal install and will be added when we start model training.
-
-
-
-No need to download the datasets just the FAISS and Best model of GNN for wor
-
-## Frontend
-
-A simple Vite + React app is included at `frontend/my-react-app` for quick exploration. To run it:
-
-```powershell
 cd frontend/my-react-app
 npm install
 npm run dev
-```
+Ensure you create a .env file with your VITE_TMDB_API_KEY to see movie posters.
 
-Create `frontend/my-react-app/.env` from `frontend/my-react-app/.env.example` and add your `VITE_TMDB_API_KEY` there. **Do not commit your `.env` file.**
-
-## Notes on models & install
-
-- The project uses PyTorch and PyTorch Geometric for GNN work; installing PyG may require platform-specific commands (see https://pytorch-geometric.readthedocs.io).
-- FAISS is used for nearest-neighbor retrieval — `faiss-cpu` is included in `requirements.txt` for CPU installs.
-
----
-
-*If you want, I can create a GitHub repository for you (requires GitHub account & auth) and push these changes publicly — tell me if you'd like me to proceed and whether you want the repo name to match the current folder (`GNN`) or a different one.*
