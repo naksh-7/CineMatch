@@ -51,3 +51,20 @@ npm install
 npm run dev
 Ensure you create a .env file with your VITE_TMDB_API_KEY to see movie posters.
 
+## Security Review
+
+A security assessment of the CineMatch system architecture was conducted as part of this project.
+
+The review includes:
+
+- System architecture analysis
+- Asset identification
+- Trust boundary analysis
+- Attack surface identification
+- STRIDE-based threat modeling
+- Potential vulnerability analysis
+- Security recommendations
+
+You can read the full report here:
+
+➡️ [CineMatch Security Review](CineMatch_Security_Review_Final.md)
